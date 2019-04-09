@@ -1,2 +1,3 @@
 
-module.exports = require('./lib/recipe-parser');
+import recipeparser from "./lib/recipe-parser";
+export default recipeparser;
