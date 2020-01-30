@@ -1,36 +1,67 @@
-import assert from "assert";
-import nodeUtil from "util";
-import natural from "natural";
-import pluralize from "pluralize";
-import chai from "chai";
-import { indexjs as RecipeParser } from "../";
-import * as util from "../lib/util";
-import { cooksillustratedparserjs as cooksillustratedparser } from "../lib/cooks-illustrated-parser";
-import { seriouseatsparserjs as seriouseatsparser } from "../lib/serious-eats-parser";
-import { cooksillustratedjs as cooksillustrated } from "./data/cooks-illustrated";
-import { seriouseatsjs as seriouseats } from "./data/serious-eats";
-/*global require, describe, it */
-var expect = chai.expect, _ = util._;
+var _assert = require("assert");
 
-var Parsers = [
-    cooksillustratedparser,
-    seriouseatsparser,
-  ],
-  parsers = [
-    new Parsers[0](),
-    new Parsers[1](),
-  ],
-  ingredientSets = [
-    cooksillustrated,
-    seriouseats
-  ];
+var _assert2 = _interopRequireDefault(_assert);
+
+var _util = require("util");
+
+var _util2 = _interopRequireDefault(_util);
+
+var _natural = require("natural");
+
+var _natural2 = _interopRequireDefault(_natural);
+
+var _pluralize = require("pluralize");
+
+var _pluralize2 = _interopRequireDefault(_pluralize);
+
+var _chai = require("chai");
+
+var _chai2 = _interopRequireDefault(_chai);
+
+var _2 = require("../");
+
+var _util3 = require("../lib/util");
+
+var util = _interopRequireWildcard(_util3);
+
+var _cooksIllustratedParser = require("../lib/cooks-illustrated-parser");
+
+var _seriousEatsParser = require("../lib/serious-eats-parser");
+
+var _cooksIllustrated = require("./data/cooks-illustrated");
+
+var _seriousEats = require("./data/serious-eats");
+
+function _interopRequireWildcard(obj) {
+  if (obj && obj.__esModule) {
+    return obj;
+  } else {
+    var newObj = {};if (obj != null) {
+      for (var key in obj) {
+        if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];
+      }
+    }newObj.default = obj;return newObj;
+  }
+}
+
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : { default: obj };
+}
+
+/*global require, describe, it */
+var expect = _chai2.default.expect,
+    _ = util._;
+
+var Parsers = [_cooksIllustratedParser.cooksillustratedparserjs, _seriousEatsParser.seriouseatsparserjs],
+    parsers = [new Parsers[0](), new Parsers[1]()],
+    ingredientSets = [_cooksIllustrated.cooksillustratedjs, _seriousEats.seriouseatsjs];
 
 // test helper functions
 function getKeyFromTestData(value, key) {
   var retval;
 
   if (_.isArray(value)) {
-    retval = _.map(value, function(val) {
+    retval = _.map(value, function (val) {
       if (val.isDivider) {
         return _.pluck(val.ingredients, key);
       } else {
@@ -48,105 +79,35 @@ function getKeyFromTestData(value, key) {
 
 describe('pluralize', function () {
   var pluralizeTests = [
-    // Uncountables.
-    ['dozen', 'dozen'],
-    ['feet', 'feet'],
-    ['large', 'large'],
-    ['medium', 'medium'],
-    ['mini', 'mini'],
-    ['small', 'small'],
-    ['whole', 'whole'],
-    // Pluralization.
-    ['man', 'men'],
-    ['superman', 'supermen'],
-    ['ox', 'oxen'],
-    ['bag', 'bags'],
-    ['batch', 'batches'],
-    ['block', 'blocks'],
-    ['bottle', 'bottles'],
-    ['box', 'boxes'],
-    ['bunch', 'bunches'],
-    ['can', 'cans'],
-    ['clove', 'cloves'],
-    ['container', 'containers'],
-    ['crown', 'crowns'],
-    ['cube', 'cubes'],
-    ['cup', 'cups'],
-    ['dash', 'dashes'],
-    ['drop', 'drops'],
-    ['ear', 'ears'],
-    ['envelope', 'envelopes'],
-    ['fillet', 'fillets'],
-    ['fluid ounce', 'fluid ounces'],
-    ['gallon', 'gallons'],
-    ['grind', 'grinds'],
-    ['half', 'halves'],
-    ['handful', 'handfuls'],
-    ['head', 'heads'],
-    ['heart', 'hearts'],
-    ['leaf', 'leaves'],
-    ['liter', 'liters'],
-    ['loaf', 'loaves'],
-    ['ounce', 'ounces'],
-    ['package', 'packages'],
-    ['packet', 'packets'],
-    ['part', 'parts'],
-    ['pat', 'pats'],
-    ['piece', 'pieces'],
-    ['pinch', 'pinches'],
-    ['pint', 'pints'],
-    ['pouch', 'pouches'],
-    ['pound', 'pounds'],
-    ['quart', 'quarts'],
-    ['recipe', 'recipes'],
-    ['scoop', 'scoops'],
-    ['set', 'sets'],
-    ['sheet', 'sheets'],
-    ['side', 'sides'],
-    ['slab', 'slabs'],
-    ['slice', 'slices'],
-    ['splash', 'splashes'],
-    ['sprig', 'sprigs'],
-    ['sprinkle', 'sprinkles'],
-    ['stalk', 'stalks'],
-    ['stem', 'stems'],
-    ['stick', 'sticks'],
-    ['strip', 'strips'],
-    ['tablespoon', 'tablespoons'],
-    ['teaspoon', 'teaspoons'],
-    ['tin', 'tins'],
-    ['vial', 'vials']
-  ];
+  // Uncountables.
+  ['dozen', 'dozen'], ['feet', 'feet'], ['large', 'large'], ['medium', 'medium'], ['mini', 'mini'], ['small', 'small'], ['whole', 'whole'],
+  // Pluralization.
+  ['man', 'men'], ['superman', 'supermen'], ['ox', 'oxen'], ['bag', 'bags'], ['batch', 'batches'], ['block', 'blocks'], ['bottle', 'bottles'], ['box', 'boxes'], ['bunch', 'bunches'], ['can', 'cans'], ['clove', 'cloves'], ['container', 'containers'], ['crown', 'crowns'], ['cube', 'cubes'], ['cup', 'cups'], ['dash', 'dashes'], ['drop', 'drops'], ['ear', 'ears'], ['envelope', 'envelopes'], ['fillet', 'fillets'], ['fluid ounce', 'fluid ounces'], ['gallon', 'gallons'], ['grind', 'grinds'], ['half', 'halves'], ['handful', 'handfuls'], ['head', 'heads'], ['heart', 'hearts'], ['leaf', 'leaves'], ['liter', 'liters'], ['loaf', 'loaves'], ['ounce', 'ounces'], ['package', 'packages'], ['packet', 'packets'], ['part', 'parts'], ['pat', 'pats'], ['piece', 'pieces'], ['pinch', 'pinches'], ['pint', 'pints'], ['pouch', 'pouches'], ['pound', 'pounds'], ['quart', 'quarts'], ['recipe', 'recipes'], ['scoop', 'scoops'], ['set', 'sets'], ['sheet', 'sheets'], ['side', 'sides'], ['slab', 'slabs'], ['slice', 'slices'], ['splash', 'splashes'], ['sprig', 'sprigs'], ['sprinkle', 'sprinkles'], ['stalk', 'stalks'], ['stem', 'stems'], ['stick', 'sticks'], ['strip', 'strips'], ['tablespoon', 'tablespoons'], ['teaspoon', 'teaspoons'], ['tin', 'tins'], ['vial', 'vials']];
 
   it('should pluralize words', function () {
     pluralizeTests.forEach(function (word) {
-      expect(word[1]).to.equal(pluralize.plural(word[0]));
+      expect(word[1]).to.equal(_pluralize2.default.plural(word[0]));
     });
   });
 });
 
-describe('recipe instructions parser', function() {
-  it('should parse quantity', function() {
-    var expectedQuantity,
-        ingredients,
-        quantity,
-        parser,
-        value,
-        key;
+describe('recipe instructions parser', function () {
+  it('should parse quantity', function () {
+    var expectedQuantity, ingredients, quantity, parser, value, key;
 
-    _.each(_.zip(ingredientSets, parsers), function(tuple) {
+    _.each(_.zip(ingredientSets, parsers), function (tuple) {
       ingredients = tuple[0];
       parser = tuple[1];
 
-      _.each(ingredients, function(ingredient) {
+      _.each(ingredients, function (ingredient) {
         key = _.first(_.keys(ingredient));
         value = _.first(_.values(ingredient));
         expectedQuantity = getKeyFromTestData(value, 'quantity');
         quantity = parser.getQuantity(key);
 
-        _.each(expectedQuantity, function(expected) {
+        _.each(expectedQuantity, function (expected) {
           if (_.isArray(expected)) {
-            _.each(expected, function(expectedChild) {
+            _.each(expected, function (expectedChild) {
               expect(quantity).to.equal(expectedChild);
             });
           } else {
@@ -157,27 +118,22 @@ describe('recipe instructions parser', function() {
     });
   });
 
-  it('should parse measurement', function() {
-    var expectedMeasurement,
-        ingredients,
-        measurement,
-        parser,
-        value,
-        key;
+  it('should parse measurement', function () {
+    var expectedMeasurement, ingredients, measurement, parser, value, key;
 
-    _.each(_.zip(ingredientSets, parsers), function(tuple) {
+    _.each(_.zip(ingredientSets, parsers), function (tuple) {
       ingredients = tuple[0];
       parser = tuple[1];
 
-      _.each(ingredients, function(ingredient) {
+      _.each(ingredients, function (ingredient) {
         key = _.first(_.keys(ingredient));
         value = _.first(_.values(ingredient));
         expectedMeasurement = getKeyFromTestData(value, 'measurement');
         measurement = (parser.getMeasurement(key) || {}).matched;
 
-        _.each(expectedMeasurement, function(expected) {
+        _.each(expectedMeasurement, function (expected) {
           if (_.isArray(expected)) {
-            _.each(expected, function(expectedChild) {
+            _.each(expected, function (expectedChild) {
               expect(measurement).to.equal(expectedChild);
             });
           } else {
@@ -188,19 +144,14 @@ describe('recipe instructions parser', function() {
     });
   });
 
-  it('should parse description', function() {
-    var expectedDescriptions,
-        descriptions,
-        ingredients,
-        parser,
-        value,
-        key;
+  it('should parse description', function () {
+    var expectedDescriptions, descriptions, ingredients, parser, value, key;
 
-    _.each(_.zip(ingredientSets, parsers), function(tuple) {
+    _.each(_.zip(ingredientSets, parsers), function (tuple) {
       ingredients = tuple[0];
       parser = tuple[1];
 
-      _.each(ingredients, function(ingredient) {
+      _.each(ingredients, function (ingredient) {
         key = _.first(_.keys(ingredient));
         value = _.first(_.values(ingredient));
         expectedDescriptions = getKeyFromTestData(value, 'description');
@@ -219,20 +170,14 @@ describe('recipe instructions parser', function() {
     });
   });
 
-  it('should parse directions and alts', function() {
-    var expectedDirections,
-        expectedAlts,
-        ingredients,
-        directions,
-        parser,
-        value,
-        key;
+  it('should parse directions and alts', function () {
+    var expectedDirections, expectedAlts, ingredients, directions, parser, value, key;
 
-    _.each(_.zip(ingredientSets, parsers), function(tuple) {
+    _.each(_.zip(ingredientSets, parsers), function (tuple) {
       ingredients = tuple[0];
       parser = tuple[1];
 
-      _.each(ingredients, function(ingredient) {
+      _.each(ingredients, function (ingredient) {
         key = _.first(_.keys(ingredient));
         value = _.first(_.values(ingredient));
         expectedDirections = getKeyFromTestData(value, 'direction');
@@ -250,30 +195,18 @@ describe('recipe instructions parser', function() {
             expect(directions[i].alt).to.equal(expectedAlts[i]);
           }
         }
-
       });
     });
   });
 
-  it('should collate all data, [quantity, measurement, description, direction, and alts]', function() {
-    var descriptionObj,
-        descriptions,
-        measurements,
-        measurement,
-        ingredients,
-        quantities,
-        directions,
-        allPieces,
-        quantity,
-        parser,
-        values,
-        key;
+  it('should collate all data, [quantity, measurement, description, direction, and alts]', function () {
+    var descriptionObj, descriptions, measurements, measurement, ingredients, quantities, directions, allPieces, quantity, parser, values, key;
 
-    _.each(_.zip(ingredientSets, parsers), function(tuple) {
+    _.each(_.zip(ingredientSets, parsers), function (tuple) {
       ingredients = tuple[0];
       parser = tuple[1];
 
-      _.each(ingredients, function(ingredient) {
+      _.each(ingredients, function (ingredient) {
         key = _.first(_.keys(ingredient));
         values = _.first(_.values(ingredient));
 
@@ -307,7 +240,7 @@ describe('recipe instructions parser', function() {
         }
 
         function zipWalker(arrays) {
-          _.each(arrays, function(array) {
+          _.each(arrays, function (array) {
             arrayWalker(array);
           });
         }
@@ -323,43 +256,40 @@ describe('recipe instructions parser', function() {
               // when an ingredient gets broken down into two or more sub
               // ingredients, typically happens for `or` types. The typage is
               // important as it denotes a grouping to the callee.
-              _.each(vals, function(val) {
+              _.each(vals, function (val) {
                 walker(val);
               });
             }
           } else if (vals.isDivider) {
             zipWalker(_.zip(vals.ingredients, descriptions, directions, quantities, measurements));
           } else {
-            zipWalker(_.zip([ vals ], descriptions, directions, quantities, measurements));
+            zipWalker(_.zip([vals], descriptions, directions, quantities, measurements));
           }
         })(values);
-
       });
     });
   });
 
-  it('should collate and produce a pretty result', function() {
-    var expectedVals,
-        expectedVal,
-        ingredients,
-        actuals,
-        parser,
-        actual,
-        key;
+  it('should collate and produce a pretty result', function () {
+    var expectedVals, expectedVal, ingredients, actuals, parser, actual, key;
 
-    _.each(_.zip(ingredientSets, parsers), function(tuple) {
+    _.each(_.zip(ingredientSets, parsers), function (tuple) {
       ingredients = tuple[0];
       parser = tuple[1];
 
-      _.each(ingredients, function(ingredient) {
+      _.each(ingredients, function (ingredient) {
         key = _.first(_.keys(ingredient));
         expectedVals = _.first(_.values(ingredient));
 
         actuals = parser.parseIngredient(key);
-        if (!_.isArray(actuals)) { actuals = [actuals]; }
-        if (!_.isArray(expectedVals)) { expectedVals = [expectedVals]; }
+        if (!_.isArray(actuals)) {
+          actuals = [actuals];
+        }
+        if (!_.isArray(expectedVals)) {
+          expectedVals = [expectedVals];
+        }
 
-        _.zip(actuals, expectedVals, function(tuple) {
+        _.zip(actuals, expectedVals, function (tuple) {
           actual = tuple[0];
           expectedVal = tuple[1];
 
@@ -368,11 +298,8 @@ describe('recipe instructions parser', function() {
           } else {
             expect(actual).to.deep.equal(expectedVal);
           }
-
         });
-
       });
     });
-
   });
 });
