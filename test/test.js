@@ -1,25 +1,27 @@
+import assert from "assert";
+import nodeUtil from "util";
+import natural from "natural";
+import pluralize from "pluralize";
+import chai from "chai";
+import { util as libutil_utiljs } from "../lib/util";
+import { libcooksillustratedparser_obj } from "../lib/cooks-illustrated-parser";
+import { libseriouseatsparser_obj } from "../lib/serious-eats-parser";
+import { datacooksillustrated_obj } from "./data/cooks-illustrated";
+import { dataseriouseats_obj } from "./data/serious-eats";
 /*global require, describe, it */
-var assert = require('assert'),
-    nodeUtil = require('util'),
-    natural = require('natural'),
-    pluralize = require('pluralize'),
-    chai = require('chai'),
-    expect = chai.expect,
-    RecipeParser = require('../'),
-    util = require('../lib/util'),
-    _ = util._;
+var expect = chai.expect, _ = libutil_utiljs._;
 
 var Parsers = [
-    require('../lib/cooks-illustrated-parser'),
-    require('../lib/serious-eats-parser'),
+    libcooksillustratedparser_obj,
+    libseriouseatsparser_obj,
   ],
   parsers = [
-    new Parsers[0](),
-    new Parsers[1](),
+    new libcooksillustratedparser_obj[0](),
+    new libcooksillustratedparser_obj[1](),
   ],
   ingredientSets = [
-    require('./data/cooks-illustrated'),
-    require('./data/serious-eats')
+    datacooksillustrated_obj,
+    dataseriouseats_obj
   ];
 
 // test helper functions
@@ -131,7 +133,7 @@ describe('recipe instructions parser', function() {
         value,
         key;
 
-    _.each(_.zip(ingredientSets, parsers), function(tuple) {
+    _.each(_.zip(datacooksillustrated_obj, parsers), function(tuple) {
       ingredients = tuple[0];
       parser = tuple[1];
 
@@ -162,7 +164,7 @@ describe('recipe instructions parser', function() {
         value,
         key;
 
-    _.each(_.zip(ingredientSets, parsers), function(tuple) {
+    _.each(_.zip(datacooksillustrated_obj, parsers), function(tuple) {
       ingredients = tuple[0];
       parser = tuple[1];
 
@@ -193,7 +195,7 @@ describe('recipe instructions parser', function() {
         value,
         key;
 
-    _.each(_.zip(ingredientSets, parsers), function(tuple) {
+    _.each(_.zip(datacooksillustrated_obj, parsers), function(tuple) {
       ingredients = tuple[0];
       parser = tuple[1];
 
@@ -225,7 +227,7 @@ describe('recipe instructions parser', function() {
         value,
         key;
 
-    _.each(_.zip(ingredientSets, parsers), function(tuple) {
+    _.each(_.zip(datacooksillustrated_obj, parsers), function(tuple) {
       ingredients = tuple[0];
       parser = tuple[1];
 
@@ -266,7 +268,7 @@ describe('recipe instructions parser', function() {
         values,
         key;
 
-    _.each(_.zip(ingredientSets, parsers), function(tuple) {
+    _.each(_.zip(datacooksillustrated_obj, parsers), function(tuple) {
       ingredients = tuple[0];
       parser = tuple[1];
 
@@ -344,7 +346,7 @@ describe('recipe instructions parser', function() {
         actual,
         key;
 
-    _.each(_.zip(ingredientSets, parsers), function(tuple) {
+    _.each(_.zip(datacooksillustrated_obj, parsers), function(tuple) {
       ingredients = tuple[0];
       parser = tuple[1];
 
