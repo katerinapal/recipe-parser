@@ -1,25 +1,27 @@
+import assert from "assert";
+import nodeUtil from "util";
+import natural from "natural";
+import pluralize from "pluralize";
+import chai from "chai";
+import { util as libutil_utiljs } from "../lib/util";
+import {   cooksillustratedparserjs as libcooksillustratedparser_cooksillustratedparserjs, } from "../lib/cooks-illustrated-parser";
+import { seriouseatsparserjs as libseriouseatsparser_seriouseatsparserjs } from "../lib/serious-eats-parser";
+import { cooksillustratedjs as datacooksillustrated_cooksillustratedjs } from "./data/cooks-illustrated";
+import { seriouseatsjs as dataseriouseats_seriouseatsjs } from "./data/serious-eats";
 /*global require, describe, it */
-var assert = require('assert'),
-    nodeUtil = require('util'),
-    natural = require('natural'),
-    pluralize = require('pluralize'),
-    chai = require('chai'),
-    expect = chai.expect,
-    RecipeParser = require('../'),
-    util = require('../lib/util'),
-    _ = util._;
+var expect = chai.expect, _ = libutil_utiljs._;
 
 var Parsers = [
-    require('../lib/cooks-illustrated-parser'),
-    require('../lib/serious-eats-parser'),
+    libcooksillustratedparser_cooksillustratedparserjs,
+    libseriouseatsparser_seriouseatsparserjs,
   ],
   parsers = [
     new Parsers[0](),
     new Parsers[1](),
   ],
   ingredientSets = [
-    require('./data/cooks-illustrated'),
-    require('./data/serious-eats')
+    datacooksillustrated_cooksillustratedjs,
+    dataseriouseats_seriouseatsjs
   ];
 
 // test helper functions
