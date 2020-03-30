@@ -1,3 +1,4 @@
+var seriouseatsjs_seriouseatsjs;
 module.exports = [
   {
     "Cooking spray": {
@@ -1668,3 +1669,4 @@ module.exports = [
     }
   }
 ];
+export { seriouseatsjs_seriouseatsjs as seriouseatsjs };

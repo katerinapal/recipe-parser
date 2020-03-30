@@ -1,3 +1,4 @@
+var cooksillustratedjs_cooksillustratedjs;
 module.exports = [
   {
     "2 pounds russet potatoes, unpeeled and scrubbed": {
@@ -1363,3 +1364,4 @@ module.exports = [
     }
   }
 ];
+export { cooksillustratedjs_cooksillustratedjs as cooksillustratedjs };
