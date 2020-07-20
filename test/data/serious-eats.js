@@ -1,4 +1,4 @@
-module.exports = [
+seriouseatsjs_seriouseatsjs = [
   {
     "Cooking spray": {
       "description": "Cooking spray"
@@ -1668,3 +1668,5 @@ module.exports = [
     }
   }
 ];
+var seriouseatsjs_seriouseatsjs;
+export { seriouseatsjs_seriouseatsjs as seriouseatsjs };
