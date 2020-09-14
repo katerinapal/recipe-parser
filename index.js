@@ -1,5 +1,12 @@
+"use strict";
 
-import { RecipeParser as librecipeparser_RecipeParserjs } from "./lib/recipe-parser";
-indexjs_indexjs = librecipeparser_RecipeParserjs;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.indexjs = undefined;
+
+var _recipeParser = require("./lib/recipe-parser");
+
+exports.indexjs = indexjs_indexjs = _recipeParser.RecipeParser;
 var indexjs_indexjs;
-export { indexjs_indexjs as indexjs };
+exports.indexjs = indexjs_indexjs;
