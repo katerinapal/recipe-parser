@@ -1,4 +1,4 @@
-module.exports = {
+mod_goodeatsjs = {
   "82": {
     "name": "S01E05 - Broiled, Butterflied Chicken",
     "categories": [
@@ -13827,3 +13827,5 @@ module.exports = {
     ]
   }
 };
+var mod_goodeatsjs;
+export { mod_goodeatsjs as goodeatsjs };
